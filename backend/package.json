@@ -1,0 +1,22 @@
+{
+  "name": "vente-objets",
+  "version": "1.0.0",
+  "description": "exercice",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pathymavuba/appli-ventes-des-objets.git"
+  },
+  "author": "pathymavuba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pathymavuba/appli-ventes-des-objets/issues"
+  },
+  "homepage": "https://github.com/Pathymavuba/appli-ventes-des-objets#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
