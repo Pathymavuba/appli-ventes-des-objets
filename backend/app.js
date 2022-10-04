@@ -1,6 +1,18 @@
 const express = require('express');
 
 const app = express();
+const  Objet = require('./models/objet')
+const mongoose = require('mongoose');
+const objet = require('./models/objet');
+const { request } = require('express');
+
+const db_url = 'mongodb+srv://pathy:LaethiciaKandolo@cluster0.pfgm2xt.mongodb.net/?retryWrites=true&w=majority'
+
+mongoose.connect(db_url)
+ .then(resultat=>console.log('La connexion avec la db a reussie!'))
+ .catch((err)=>console.log(err))
+
+app.use(express.json());
 
 app.use((req, res, next) => {
     //l'entête permettant à deux origines de s'entendre 
@@ -10,26 +22,26 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/api/stuff', (req, res, next) => {
-    const stuff = [
-      {
-        _id: 'oeihfzeoi',
-        title: 'Mon premier objet',
-        description: 'Les infos de mon premier objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 4900,
-        userId: 'qsomihvqios',
-      },
-      {
-        _id: 'oeihfzeomoihi',
-        title: 'Mon deuxième objet',
-        description: 'Les infos de mon deuxième objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 2900,
-        userId: 'qsomihvqios',
-      },
-    ];
-    res.status(200).json(stuff);
+  app.post('/api/stuff', (req, res) => {
+    delete req.body._id;
+    const objet = new Objet({...req.body});
+      objet.save()
+     .then(resultat=>console.log("Obejet ajouté avec succès"))
+     .catch(err=>res.status(404).json({err}))
   });
+  app.get('/api/stuff/:id', (req, res, next) => {
+    objet.findOne({ _id: req.params.id })
+      .then(objet => res.status(200).json(objet))
+      .catch(error => res.status(404).json({ error }));
+  });
+ 
+app.get('/api/stuff', (req, res, next) => {
+   objet.find()
+    .then((objets)=>{res.status(200).json(objets)})
+    .catch(err=>res.status(404).json({err}))
+  
+  })
+  
+ 
 
 module.exports = app;
