@@ -41,6 +41,19 @@ app.get('/api/stuff', (req, res, next) => {
     .catch(err=>res.status(404).json({err}))
   
   })
+app.put('/api/stuff/:id',(req,res,next)=>{
+  objet.updateOne({_id:req.params.id},{ ...req.body, _id: req.params.id })
+   .then(()=>res.status(200).json({ message: 'Objet modifié !'}))
+   .catch(error => res.status(404).json({ error }));
+  
+
+})
+app.delete('/api/stuff/:id',(req,res,next)=>{
+  objet.deleteOne({id:req.params.id})
+  .then(()=>res.status(200).json({ message: 'Objet supprimé avec succès!'}))
+   .catch(error => res.status(404).json({ error }));
+   
+})
   
  
 
