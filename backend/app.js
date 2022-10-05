@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const  Objet = require('./models/objet')
 const mongoose = require('mongoose');
-const objet = require('./models/objet');
 const { request } = require('express');
 const stuffroutes = require('./routes/stuff')
 
@@ -25,6 +24,4 @@ app.use((req, res, next) => {
 
 app.use('/api/stuff',stuffroutes)
   
- 
-
 module.exports = app;
