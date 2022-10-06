@@ -5,6 +5,7 @@ const  Objet = require('./models/objet')
 const mongoose = require('mongoose');
 const { request } = require('express');
 const stuffroutes = require('./routes/stuff')
+const userroutes = require('./routes/user')
 
 const db_url = 'mongodb+srv://pathy:LaethiciaKandolo@cluster0.pfgm2xt.mongodb.net/?retryWrites=true&w=majority'
 
@@ -23,5 +24,6 @@ app.use((req, res, next) => {
   });
 
 app.use('/api/stuff',stuffroutes)
+app.use('/api/auth',userroutes)
   
 module.exports = app;
