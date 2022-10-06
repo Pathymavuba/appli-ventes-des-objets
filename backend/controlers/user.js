@@ -34,7 +34,7 @@ exports.logIn= ((req, res, next)=>{
                 console.log("mot de passe correct");
                 res.status(200).json({
                     userId:user._id,
-                    token:user.token,
+                    token:'TOKEN',
                 })
               })
               .catch(err=>res.status(500).json({err}))
