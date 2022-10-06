@@ -20,6 +20,26 @@ exports.signUp = ((req, res, next)=>{
 
 })
 
-exports.logIn= ((req, res, next)=>{})
+exports.logIn= ((req, res, next)=>{
+    User.findOne({email:req.body.email})
+     .then(user=>{
+        if (user === null){
+            return res.status(404).json({message:'pair login/mot de passe incorrect'})
+        }else{
+            bcrypt.compare(req.body.password,user.password)
+              .then(valid=>{
+                if(!valid){
+                    return res.status(404).json({message:'pair login/mot de passe incorrect'})
+                }
+                console.log("mot de passe correct");
+                res.status(200).json({
+                    userId:user._id,
+                    token:user.token,
+                })
+              })
+              .catch(err=>res.status(500).json({err}))
+        } })
+     .catch(error=>res.status(500).json({error}))
+})
 
 

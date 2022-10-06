@@ -4,6 +4,6 @@ const router = express.Router()
 const userControlers = require('../controlers/user')
 
 router.post('/signUp',userControlers.signUp)
-router.post('/signUp',userControlers.logIn)
+router.post('/logIn',userControlers.logIn)
 
 module.exports = router
